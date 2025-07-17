@@ -1,3 +1,3 @@
 # UTE AI Laboratory
 This is official repository for the website.
-Reach out: https://github.com/HoagnDawg35/ute-ailab.io 🚀
+Reach out: [UTE AI Lab Website](https://hoagndawg35.github.io/ute-ailab.io/) 🚀
