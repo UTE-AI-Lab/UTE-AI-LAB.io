@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -30,7 +30,8 @@ body {
 .navbar .logo {
   display: flex;
   align-items: center;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: larger;
 }
 
 .navbar .logo img {
@@ -79,16 +80,16 @@ body {
 
 
 /* ANNOUNCEMENT */
-/* .announcement {
+.announcement {
   background-color: #eaf6ff;
   padding: 10px 30px;
   color: #0275d8;
   font-size: 16px;
-} */
+}
 
 /* BANNER */
 .banner {
-  max-width: flex;
+  max-width: fit-content;
   background-color: white;
   margin: 30px auto;
   padding: 30px;
