@@ -1,5 +1,5 @@
-# ute-ailab.io
+ute-ailab.io
 
-## This is official repository for the UTE AI Laboraty
+#Official repository for the website of UTE AI Laboraty
 
-Reach out https://github.com/HoagnDawg35/ute-ailab
+Reach out https://github.com/HoagnDawg35/ute-ailab 🚀
