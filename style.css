@@ -359,9 +359,9 @@ body {
 }
 
 .publication-section {
-  width: 80%; 
+  width: 80%; /* or a fixed width like 800px */
   max-width: 900px;
-  margin: 0 auto; 
+  margin: 0 auto; /* Center horizontally */
   background: white;
   padding: 30px;
   border-radius: 10px;
