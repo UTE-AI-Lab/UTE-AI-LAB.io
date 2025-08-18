@@ -1,0 +1,177 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "uuid,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid.",
+        "description": "uuid.",
+        "detail": "uuid.",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "kind": 6,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "class ChatRequest(BaseModel):\n    session_id: str\n    message: str\nclass VisitLog(BaseModel):\n    visitor_id: str\n    page: str\n# ================= ROUTES =================\n@app.get(\"/api/new_session\")\ndef new_session():\n    \"\"\"Create a new chat session (used by frontend on first load).\"\"\"",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "VisitLog",
+        "kind": 6,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "class VisitLog(BaseModel):\n    visitor_id: str\n    page: str\n# ================= ROUTES =================\n@app.get(\"/api/new_session\")\ndef new_session():\n    \"\"\"Create a new chat session (used by frontend on first load).\"\"\"\n    session_id = str(uuid.uuid4())\n    chat_sessions[session_id] = []\n    visit_log[session_id] = []  # ⚠️ Difference: also track visits per session",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "new_session",
+        "kind": 2,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "def new_session():\n    \"\"\"Create a new chat session (used by frontend on first load).\"\"\"\n    session_id = str(uuid.uuid4())\n    chat_sessions[session_id] = []\n    visit_log[session_id] = []  # ⚠️ Difference: also track visits per session\n    return {\"session_id\": session_id}\n@app.post(\"/api/chat\")\ndef chat(req: ChatRequest):\n    \"\"\"Send a message to the chatbot and get a reply.\"\"\"\n    history = chat_sessions.get(req.session_id, [])",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "chat",
+        "kind": 2,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "def chat(req: ChatRequest):\n    \"\"\"Send a message to the chatbot and get a reply.\"\"\"\n    history = chat_sessions.get(req.session_id, [])\n    history.append({\"role\": \"user\", \"content\": req.message})\n    completion = client.chat.completions.create(\n        model=\"meta-llama/Meta-Llama-3-8B-Instruct:novita\",\n        messages=history\n    )\n    reply = completion.choices[0].message.content\n    history.append({\"role\": \"assistant\", \"content\": reply})",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "get_history",
+        "kind": 2,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "def get_history(session_id: str):\n    \"\"\"Return the chat history for a given session_id.\"\"\"\n    if session_id not in chat_sessions:\n        return {\"messages\": []}  # ✅ safe fallback\n    # ⚠️ Difference: map OpenAI-style {role, content} → frontend style {sender, text}\n    mapped = [\n        {\"sender\": \"You\" if msg[\"role\"] == \"user\" else \"AI\", \"text\": msg[\"content\"]}\n        for msg in chat_sessions[session_id]\n    ]\n    return {\"messages\": mapped}",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "track_visit",
+        "kind": 2,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "def track_visit(log: VisitLog):\n    \"\"\"Track which pages a visitor has seen.\"\"\"\n    if log.visitor_id not in visit_log:\n        visit_log[log.visitor_id] = []\n    visit_log[log.visitor_id].append(log.page)\n    return {\"status\": \"ok\", \"visitor_id\": log.visitor_id, \"pages\": visit_log[log.visitor_id]}",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "app = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://127.0.0.1:5500\"],  # Update for production\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\nHF_TOKEN = os.getenv(\"HF_TOKEN\")\nclient = OpenAI(",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "HF_TOKEN",
+        "kind": 5,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "HF_TOKEN = os.getenv(\"HF_TOKEN\")\nclient = OpenAI(\n    base_url=\"https://router.huggingface.co/v1\",\n    api_key=HF_TOKEN\n)\n# # In-memory storage\n# chat_sessions = {}\n# visit_log = {}\n# class ChatRequest(BaseModel):\n#     session_id: str",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "client = OpenAI(\n    base_url=\"https://router.huggingface.co/v1\",\n    api_key=HF_TOKEN\n)\n# # In-memory storage\n# chat_sessions = {}\n# visit_log = {}\n# class ChatRequest(BaseModel):\n#     session_id: str\n#     message: str",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "chat_sessions",
+        "kind": 5,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "chat_sessions = {}  # session_id -> list of {\"role\": \"user\"/\"assistant\", \"content\": \"...\"}\nvisit_log = {}      # visitor_id -> list of visited pages\n# === Request Models ===\nclass ChatRequest(BaseModel):\n    session_id: str\n    message: str\nclass VisitLog(BaseModel):\n    visitor_id: str\n    page: str\n# ================= ROUTES =================",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "visit_log",
+        "kind": 5,
+        "importPath": "chatbox.main",
+        "description": "chatbox.main",
+        "peekOfCode": "visit_log = {}      # visitor_id -> list of visited pages\n# === Request Models ===\nclass ChatRequest(BaseModel):\n    session_id: str\n    message: str\nclass VisitLog(BaseModel):\n    visitor_id: str\n    page: str\n# ================= ROUTES =================\n@app.get(\"/api/new_session\")",
+        "detail": "chatbox.main",
+        "documentation": {}
+    },
+    {
+        "label": "soup",
+        "kind": 5,
+        "importPath": "convert_html2json",
+        "description": "convert_html2json",
+        "peekOfCode": "soup = BeautifulSoup(html, \"html.parser\")\npublications = {}\nfor section in soup.find_all(\"h3\"):\n    section_name = section.get_text(strip=True)\n    publications[section_name] = []\n    ul = section.find_next_sibling(\"ul\")\n    if not ul:\n        continue\n    for li in ul.find_all(\"li\", recursive=False):\n        year_span = li.find(\"span\", class_=\"year\")",
+        "detail": "convert_html2json",
+        "documentation": {}
+    },
+    {
+        "label": "publications",
+        "kind": 5,
+        "importPath": "convert_html2json",
+        "description": "convert_html2json",
+        "peekOfCode": "publications = {}\nfor section in soup.find_all(\"h3\"):\n    section_name = section.get_text(strip=True)\n    publications[section_name] = []\n    ul = section.find_next_sibling(\"ul\")\n    if not ul:\n        continue\n    for li in ul.find_all(\"li\", recursive=False):\n        year_span = li.find(\"span\", class_=\"year\")\n        year = year_span.get_text(strip=True) if year_span else None",
+        "detail": "convert_html2json",
+        "documentation": {}
+    }
+]

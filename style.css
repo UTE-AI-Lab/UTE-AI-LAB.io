@@ -357,70 +357,125 @@ body {
 .research-image img:hover {
   transform: scale(1.02);
 }
+/* ===== Global Styles ===== */
 
+
+/* ===== Main Container ===== */
+#publications {
+  width: 85%;
+  max-width: 950px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+/* ===== Headings ===== */
+#publications h1 {
+  text-align: center;
+  font-size: 2rem;              /* Large but not overwhelming */
+  font-weight: 700;             /* Bold for emphasis */
+  color: #1e3a8a;               /* Matches your h2 section color scheme */
+  margin-bottom: 1.5rem;        /* Space below heading */
+   padding-bottom: 0.5rem;       /* Gap between text and underline */
+  font-family: 'Inter', 'IBM Plex Sans', sans-serif; /* Keep font consistent */
+}
+
+
+#publications h2 {
+  color: #1e3a8a; /* deep blue */
+  border-bottom: 3px solid #1d4ed8;
+  padding-bottom: 8px;
+  margin: 40px 0 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+#publications h3 {
+  color: #34495e; /* grayish-blue */
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+/* 
+.container h1 {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0px 0 10px; 
+  color: #1e3a8a;
+  font-family: 'Inter', 'IBM Plex Sans', sans-serif;
+} */
+
+/* ===== Publication Item (div.pub-item) ===== */
 .publication-section {
-  width: 80%; /* or a fixed width like 800px */
-  max-width: 900px;
-  margin: 0 auto; /* Center horizontally */
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-
-.publication-section h2 {
-    color: #0077cc;
-    border-bottom: 3px solid #3498db;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    text-align: center;
+.pub-item {
+  margin-bottom: 18px;
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-left: 5px solid #3498db; /* Old blue accent */
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  font-size: 0.95rem; /* compact */
+  line-height: 1.6;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.3s ease;
 }
 
-.publication-section h3 {
-    color: #34495e;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.3em;
+.pub-item:hover {
+  background: #e8f4f8; /* Old hover background */
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
-.publication-section ul {
-    padding-left: 0;
-    list-style: none;
-}
-
-.publication-section li {
-    margin-bottom: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-left: 4px solid #3498db;
-    border-radius: 5px;
-}
-
-.publication-section li:hover {
-    background: #e8f4f8;
-    transition: background-color 0.3s ease;
-}
-
+/* ===== Inline Text Styles ===== */
 .year {
-    font-weight: bold;
-    color: #2980b9;
+  font-weight: 600;
+  color: #2980b9; /* Old year blue */
+  margin-right: 6px;
 }
 
 .journal-title {
-    font-style: italic;
-    color: #7f8c8d;
+  font-style: italic;
+  color: #7f8c8d; /* Old journal gray */
+}
+
+.text-gray {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* ===== Notes & Awards ===== */
+.sci-info,
+.note-green {
+  color: #27ae60; /* SCI green */
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.note-blue {
+  color: #2563eb;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.note-gray {
+  color: #6b7280;
+  font-style: italic;
+  margin-left: 6px;
 }
 
 .award {
-    color: #e74c3c;
-    font-weight: bold;
+  color: #e67e22; /* amber/orange for awards */
+  font-weight: 600;
+  margin-left: 8px;
 }
 
-.sci-info {
-    color: #27ae60;
-    font-weight: bold;
-}
 
 /* ---------------------------------------------------------------------------------- */
 /* FOOTER SECTION */
@@ -458,4 +513,78 @@ body {
 .footer-settings {
   margin-top: 20px;
 }
+/* -------------------- Chatbot section -------------------- */
+/* Floating Chatbot Button */
+#chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1e9c76;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+/* Chat Window */
+#chatbot-window {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+#chatbot-header {
+  background: #1e9c76;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+}
+
+#chatbot-messages {
+  padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+#chatbot-input {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+#chatbot-input input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+
+#chatbot-input button {
+  background: #1e9c76;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* -------------------- Demo JSON-file publication -------------------- */
+.year { font-weight: bold; color: #444; }
+.authors { font-style: italic; }
+.title { font-weight: 600; }
+.journal { color: #0066cc; }
+.sci-info { color: green; }
+.award { color: darkred; font-weight: bold; }
 

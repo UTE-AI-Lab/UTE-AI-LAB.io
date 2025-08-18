@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -23,7 +22,8 @@
       <li><a href="index.html">HOME</a></li>
       <li><a href="team.html">MEMBERS</a></li>
       <li><a href="research.html">RESEARCH</a></li>
-      <li><a href="publications.html">PUBLICATIONS</a></li>
+      <li><a href="demo_json_publication.html">PUBLICATIONS</a></li>
+      <li><a href="awards.html">AWARDS</a></li>
       <!-- <li><a href="#">NEWS</a></li> -->
       <li><a href="https://github.com/HoagnDawg35/ute-ailab.io?tab=readme-ov-file">GITHUB</a></li> 
     </ul>
@@ -67,7 +67,19 @@
 <section class="research-image">
   <img src="pics/https_Research-n-proj.png" alt="Research Overview">
 </section>
-  
+
+<div id="chatbot-window">
+  <div id="chatbot-header">AI Assistant</div>
+  <div id="chatbot-messages"></div>
+  <div id="chatbot-input">
+    <input type="text" id="chatbot-text" placeholder="Type your message...">
+    <button id="chatbot-send">➤</button>
+  </div>
+</div>
+
+<button id="chatbot-toggle">💬 Chat</button>
+<script src="script.js"></script>
+
 </body>
   <!-- Footer -->
 <footer class="footer">
