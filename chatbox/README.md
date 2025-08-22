@@ -4,8 +4,8 @@ In this project, we use the [Qwen2.5-VL-7B](https://huggingface.co/collections/Q
 <br>
 First, we set the token of [HuggingFace](https://huggingface.co/docs/hub/security-tokens) by:
 <br>
-<div align=center> `Set HF_TOKEN=hf-...` </div>
+`Set HF_TOKEN=hf-...` 
 <br>
 After that, we run the qwen file by:
 <br>
-<div align=center> `Uvicorn qwen:app --port 8000 --reload` </div>
+`Uvicorn qwen:app --port 8000 --reload`
